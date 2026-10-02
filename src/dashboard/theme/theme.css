@@ -1,0 +1,1003 @@
+/*
+ * Dashboard package theme (overall.md 10). Every visual value is a CSS variable; override them to theme.
+ * Dark mode: set data-db-theme="dark" (or class "db-dark") on <html>. Dialogs and menus are
+ * rendered on <body>, so set it on <html> rather than on a wrapper element.
+ * All classes are prefixed "db-" and only style the package's own elements.
+ */
+
+:root {
+  --db-font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --db-font-size: 14px;
+  --db-font-size-small: 12px;
+  --db-line-height: 1.4;
+
+  --db-space-1: 4px;
+  --db-space-2: 8px;
+  --db-space-3: 12px;
+  --db-space-4: 16px;
+  --db-space-5: 24px;
+
+  --db-radius: 6px;
+  --db-radius-small: 4px;
+
+  --db-color-bg: #f5f6f8;
+  --db-color-surface: #ffffff;
+  --db-color-surface-2: #f0f2f5;
+  --db-color-hover: #e9ecf1;
+  --db-color-border: #d9dde3;
+  --db-color-text: #1f2328;
+  --db-color-text-muted: #6a7280;
+  --db-color-primary: #2f6fde;
+  --db-color-primary-hover: #245ac0;
+  --db-color-primary-contrast: #ffffff;
+  --db-color-focus: rgb(47 111 222 / 0.35);
+
+  --db-color-danger: #c62f3b;
+  --db-color-warning: #a86400;
+  --db-color-success: #1d7a46;
+  --db-color-muted: #8a919c;
+  --db-color-danger-bg: #fdecee;
+  --db-color-warning-bg: #fff4e0;
+  --db-color-success-bg: #e6f5ec;
+  --db-color-muted-bg: transparent;
+
+  --db-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.08);
+  --db-shadow-popup: 0 8px 24px rgb(0 0 0 / 0.16);
+  --db-overlay: rgb(15 20 30 / 0.45);
+  --db-state-bg: rgb(255 255 255 / 0.75);
+}
+
+:root[data-db-theme='dark'],
+:root.db-dark {
+  --db-color-bg: #14171c;
+  --db-color-surface: #1d2127;
+  --db-color-surface-2: #252a31;
+  --db-color-hover: #2d333b;
+  --db-color-border: #363c45;
+  --db-color-text: #e6e8eb;
+  --db-color-text-muted: #9aa2ad;
+  --db-color-primary: #5b8ff0;
+  --db-color-primary-hover: #7aa5f3;
+  --db-color-primary-contrast: #0d1117;
+  --db-color-focus: rgb(91 143 240 / 0.4);
+
+  --db-color-danger: #f0717b;
+  --db-color-warning: #e7a948;
+  --db-color-success: #5fc58c;
+  --db-color-muted: #7d8590;
+  --db-color-danger-bg: #3a1d21;
+  --db-color-warning-bg: #3a2c14;
+  --db-color-success-bg: #163021;
+
+  --db-shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+  --db-shadow-popup: 0 8px 24px rgb(0 0 0 / 0.5);
+  --db-overlay: rgb(0 0 0 / 0.6);
+  --db-state-bg: rgb(29 33 39 / 0.8);
+}
+
+/* ---------- base ---------- */
+
+.db-root {
+  font-family: var(--db-font);
+  font-size: var(--db-font-size);
+  line-height: var(--db-line-height);
+  color: var(--db-color-text);
+  box-sizing: border-box;
+}
+.db-root *,
+.db-root *::before,
+.db-root *::after {
+  box-sizing: inherit;
+}
+
+.db-muted {
+  color: var(--db-color-text-muted);
+}
+.db-small {
+  font-size: var(--db-font-size-small);
+}
+.db-error {
+  color: var(--db-color-danger);
+}
+.db-spacer {
+  flex: 1;
+}
+.db-right {
+  text-align: right;
+}
+.db-nowrap {
+  white-space: nowrap;
+}
+.db-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--db-space-2);
+}
+.db-note {
+  margin: 0;
+  padding: var(--db-space-2) var(--db-space-3);
+  border-radius: var(--db-radius);
+  background: var(--db-color-warning-bg);
+  color: var(--db-color-warning);
+}
+.db-highlight {
+  background: var(--db-color-warning-bg);
+}
+
+/* ---------- buttons & inputs ---------- */
+
+.db-btn,
+.db-icon-btn,
+.db-link {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.db-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--db-space-1);
+  padding: 5px var(--db-space-3);
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+  background: var(--db-color-surface);
+  white-space: nowrap;
+}
+.db-btn:hover:not(:disabled) {
+  background: var(--db-color-hover);
+}
+.db-btn--primary {
+  background: var(--db-color-primary);
+  border-color: var(--db-color-primary);
+  color: var(--db-color-primary-contrast);
+}
+.db-btn--primary:hover:not(:disabled) {
+  background: var(--db-color-primary-hover);
+}
+.db-btn--danger {
+  background: var(--db-color-danger);
+  border-color: var(--db-color-danger);
+  color: #fff;
+}
+.db-btn--danger:hover:not(:disabled) {
+  background: var(--db-color-danger);
+  filter: brightness(1.08);
+}
+.db-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+}
+.db-btn--small {
+  padding: 2px var(--db-space-2);
+  font-size: var(--db-font-size-small);
+}
+.db-btn:disabled,
+.db-icon-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.db-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: var(--db-radius-small);
+  background: transparent;
+}
+.db-icon-btn:hover:not(:disabled) {
+  background: var(--db-color-hover);
+}
+.db-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--db-color-primary);
+}
+.db-link:hover {
+  text-decoration: underline;
+}
+.db-btn:focus-visible,
+.db-icon-btn:focus-visible,
+.db-link:focus-visible,
+.db-input:focus-visible,
+.db-tabs__tab:focus-visible,
+.db-segmented__item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--db-color-focus);
+}
+
+.db-input {
+  min-width: 0;
+  padding: 4px var(--db-space-2);
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+  background: var(--db-color-surface);
+  color: var(--db-color-text);
+  font: inherit;
+}
+textarea.db-input {
+  width: 100%;
+  resize: vertical;
+}
+.db-input--narrow {
+  width: auto;
+  max-width: 140px;
+}
+.db-input--op {
+  width: auto;
+}
+.db-input--range {
+  width: 130px;
+}
+.db-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--db-space-1);
+  margin: 0 0 var(--db-space-3);
+  padding: 0;
+  border: 0;
+}
+.db-field__label {
+  font-size: var(--db-font-size-small);
+  font-weight: 600;
+  color: var(--db-color-text-muted);
+}
+.db-field__error {
+  font-size: var(--db-font-size-small);
+  color: var(--db-color-danger);
+}
+.db-inline-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--db-space-2);
+}
+.db-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--db-space-2);
+  cursor: pointer;
+}
+.db-fieldset {
+  margin: 0 0 var(--db-space-4);
+  padding: var(--db-space-3);
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+}
+.db-fieldset legend {
+  padding: 0 var(--db-space-1);
+  font-weight: 600;
+}
+.db-range {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--db-space-1);
+}
+.db-value-input {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--db-space-1);
+}
+
+.db-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--db-color-surface-2);
+  font-size: var(--db-font-size-small);
+  line-height: 18px;
+  white-space: nowrap;
+}
+.db-badge--danger {
+  background: var(--db-color-danger);
+  color: #fff;
+}
+
+.db-segmented {
+  display: inline-flex;
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+  overflow: hidden;
+}
+.db-segmented__item {
+  padding: 4px var(--db-space-2);
+  border: 0;
+  background: var(--db-color-surface);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.db-segmented__item + .db-segmented__item {
+  border-left: 1px solid var(--db-color-border);
+}
+.db-segmented__item[aria-checked='true'] {
+  background: var(--db-color-primary);
+  color: var(--db-color-primary-contrast);
+}
+
+.db-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--db-color-border);
+  border-top-color: var(--db-color-primary);
+  border-radius: 50%;
+  animation: db-spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+@keyframes db-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- lists & tables ---------- */
+
+.db-list {
+  margin: 0 0 var(--db-space-2);
+  padding: 0;
+  list-style: none;
+}
+.db-list--scroll {
+  max-height: 320px;
+  overflow: auto;
+}
+.db-list__row {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-2);
+  padding: var(--db-space-1) var(--db-space-2);
+  border-radius: var(--db-radius-small);
+}
+.db-list__row--stacked {
+  flex-direction: column;
+  align-items: stretch;
+}
+.db-list__row--link:hover,
+.db-list__row--selectable:hover {
+  background: var(--db-color-hover);
+}
+.db-list__row--selectable {
+  cursor: pointer;
+}
+.db-list__row--selected {
+  background: var(--db-color-surface-2);
+  font-weight: 600;
+}
+.db-list__actions {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.db-data-table,
+.db-config-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.db-data-table th,
+.db-data-table td,
+.db-config-table th,
+.db-config-table td {
+  padding: var(--db-space-1) var(--db-space-2);
+  border-bottom: 1px solid var(--db-color-border);
+  text-align: left;
+  vertical-align: middle;
+}
+.db-data-table th,
+.db-config-table th {
+  font-size: var(--db-font-size-small);
+  color: var(--db-color-text-muted);
+}
+.db-config-table .db-input {
+  width: 100%;
+}
+.db-config-table .db-input--narrow {
+  width: 70px;
+}
+.db-version-summary {
+  margin: var(--db-space-1) 0 0;
+  padding-left: var(--db-space-5);
+  color: var(--db-color-text-muted);
+}
+
+/* ---------- menus, popovers, dialogs, toasts ---------- */
+
+.db-menu,
+.db-popover {
+  z-index: 1000;
+  min-width: 180px;
+  max-height: var(--reka-dropdown-menu-content-available-height, 70vh);
+  overflow: auto;
+  padding: var(--db-space-1);
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+  background: var(--db-color-surface);
+  box-shadow: var(--db-shadow-popup);
+}
+.db-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-2);
+  padding: 5px var(--db-space-2);
+  border-radius: var(--db-radius-small);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+.db-menu__item[data-highlighted] {
+  background: var(--db-color-hover);
+}
+.db-menu__item[data-disabled] {
+  opacity: 0.45;
+  cursor: default;
+}
+.db-menu__item--danger {
+  color: var(--db-color-danger);
+}
+.db-menu__check {
+  width: 14px;
+  color: var(--db-color-primary);
+}
+.db-menu__hint {
+  margin-left: auto;
+  padding-left: var(--db-space-3);
+  color: var(--db-color-text-muted);
+  font-size: var(--db-font-size-small);
+}
+.db-menu__separator {
+  height: 1px;
+  margin: var(--db-space-1) 0;
+  background: var(--db-color-border);
+}
+.db-menu__heading {
+  padding: 4px var(--db-space-2);
+  color: var(--db-color-text-muted);
+  font-size: var(--db-font-size-small);
+}
+
+.db-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: var(--db-overlay);
+}
+.db-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 901;
+  display: flex;
+  width: calc(100vw - 32px);
+  max-height: calc(100vh - 48px);
+  transform: translate(-50%, -50%);
+  border-radius: var(--db-radius);
+  background: var(--db-color-surface);
+  color: var(--db-color-text);
+  box-shadow: var(--db-shadow-popup);
+  font-family: var(--db-font);
+  font-size: var(--db-font-size);
+  line-height: var(--db-line-height);
+}
+.db-dialog--sm {
+  max-width: 440px;
+}
+.db-dialog--md {
+  max-width: 640px;
+}
+.db-dialog--lg {
+  max-width: 1100px;
+}
+.db-dialog:focus {
+  outline: none;
+}
+.db-dialog__frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+.db-dialog__header,
+.db-dialog__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-2);
+  padding: var(--db-space-3) var(--db-space-4);
+}
+.db-dialog__header {
+  border-bottom: 1px solid var(--db-color-border);
+}
+.db-dialog__footer {
+  justify-content: flex-end;
+  border-top: 1px solid var(--db-color-border);
+}
+.db-dialog__title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--db-space-2);
+  margin: 0;
+  font-size: 16px;
+}
+.db-dialog__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--db-space-4);
+}
+.db-dialog__body > * + * {
+  margin-top: var(--db-space-3);
+}
+.db-dialog__message {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.db-toasts {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: var(--db-space-2);
+  max-width: min(420px, calc(100vw - 32px));
+}
+.db-toast {
+  padding: var(--db-space-2) var(--db-space-3);
+  border-left: 4px solid var(--db-color-primary);
+  border-radius: var(--db-radius);
+  background: var(--db-color-surface);
+  color: var(--db-color-text);
+  box-shadow: var(--db-shadow-popup);
+  font-family: var(--db-font);
+  font-size: var(--db-font-size);
+}
+.db-toast--error {
+  border-left-color: var(--db-color-danger);
+}
+.db-toast--warning {
+  border-left-color: var(--db-color-warning);
+}
+
+/* ---------- page ---------- */
+
+.db-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--db-space-3);
+}
+.db-page__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--db-space-2);
+}
+.db-page__title-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--db-space-2);
+}
+.db-page__title {
+  margin: 0;
+  font-size: 20px;
+}
+.db-page__description {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--db-color-text-muted);
+}
+.db-page__state,
+.db-page__empty {
+  padding: var(--db-space-5);
+  text-align: center;
+  color: var(--db-color-text-muted);
+}
+.db-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--db-space-1);
+}
+.db-toolbar__divider {
+  width: 1px;
+  height: 22px;
+  margin: 0 var(--db-space-1);
+  background: var(--db-color-border);
+}
+.db-fav {
+  font-size: 18px;
+  color: var(--db-color-warning);
+}
+
+/* GridStack: let the package's variables drive the look. */
+.db-grid {
+  margin: calc(var(--db-space-1) * -1.5);
+}
+.db-grid > .grid-stack-item > .grid-stack-item-content {
+  overflow: visible;
+}
+.db-grid.grid-stack > .grid-stack-item > .ui-resizable-se {
+  opacity: 0.6;
+}
+.grid-stack-placeholder > .placeholder-content {
+  border: 2px dashed var(--db-color-primary);
+  border-radius: var(--db-radius);
+  background: var(--db-color-focus);
+}
+
+.db-cell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.db-cell--editing {
+  outline: 2px dashed var(--db-color-border);
+  outline-offset: -1px;
+  border-radius: var(--db-radius);
+}
+.db-cell__edit-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-2);
+  padding: 2px var(--db-space-2);
+  border-radius: var(--db-radius) var(--db-radius) 0 0;
+  background: var(--db-color-surface-2);
+  font-size: var(--db-font-size-small);
+}
+.db-cell__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-drag-handle {
+  cursor: grab;
+  color: var(--db-color-text-muted);
+  user-select: none;
+}
+
+/* ---------- filter setup (edit mode) ---------- */
+
+.db-filter-setup {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 2fr;
+  gap: var(--db-space-4);
+}
+@media (max-width: 767px) {
+  .db-filter-setup {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- blocks ---------- */
+
+.db-block {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+  background: var(--db-color-surface);
+  box-shadow: var(--db-shadow);
+  overflow: hidden;
+}
+.db-block--fullscreen {
+  position: fixed;
+  inset: 12px;
+  z-index: 800;
+  height: auto;
+  box-shadow: var(--db-shadow-popup);
+}
+.db-block--preview {
+  box-shadow: none;
+}
+.db-block__header {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-2);
+  min-height: 38px;
+  padding: var(--db-space-1) var(--db-space-2) var(--db-space-1) var(--db-space-3);
+  border-bottom: 1px solid var(--db-color-border);
+}
+.db-block__title {
+  margin: 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-block__body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.db-block__state {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--db-space-2);
+  padding: var(--db-space-4);
+  background: var(--db-state-bg);
+  color: var(--db-color-text-muted);
+  text-align: center;
+}
+.db-block__state--error {
+  color: var(--db-color-danger);
+}
+.db-block__state--empty {
+  background: var(--db-color-surface);
+}
+.db-block--unavailable {
+  position: relative;
+  border-style: dashed;
+  background: var(--db-color-surface-2);
+}
+.db-saved-trigger {
+  max-width: 220px;
+}
+.db-saved-trigger__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.db-saved-trigger__changed {
+  color: var(--db-color-warning);
+  font-weight: 700;
+}
+
+/* conditional formatting styles (rules → semantic styles) */
+.db-fmt-danger {
+  background-color: var(--db-color-danger-bg) !important;
+  color: var(--db-color-danger) !important;
+}
+.db-fmt-warning {
+  background-color: var(--db-color-warning-bg) !important;
+  color: var(--db-color-warning) !important;
+}
+.db-fmt-success {
+  background-color: var(--db-color-success-bg) !important;
+  color: var(--db-color-success) !important;
+}
+.db-fmt-muted {
+  background-color: var(--db-color-muted-bg) !important;
+  color: var(--db-color-muted) !important;
+}
+.db-swatch {
+  padding: 0 6px;
+  border-radius: var(--db-radius-small);
+}
+
+/* ---------- block form, rules, conditions ---------- */
+
+.db-block-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--db-space-4);
+}
+@media (max-width: 900px) {
+  .db-block-form {
+    grid-template-columns: 1fr;
+  }
+}
+.db-block-form__preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--db-space-1);
+}
+.db-block-form__preview-box {
+  display: flex;
+  height: 420px;
+}
+.db-conditions,
+.db-rules {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--db-space-2);
+}
+.db-condition {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--db-space-1);
+}
+.db-rule {
+  align-self: stretch;
+  padding: var(--db-space-2);
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+}
+.db-rule__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--db-space-1);
+}
+.db-rule__when {
+  display: flex;
+  gap: var(--db-space-2);
+  margin-top: var(--db-space-2);
+}
+.db-config-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--db-space-2);
+}
+
+/* ---------- tab groups ---------- */
+
+.db-tab-group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+  background: var(--db-color-surface-2);
+}
+.db-tab-group__header {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-2);
+  padding: 0 var(--db-space-2);
+  border-bottom: 1px solid var(--db-color-border);
+}
+.db-tabs {
+  display: flex;
+  gap: var(--db-space-1);
+  overflow-x: auto;
+}
+.db-tabs__tab {
+  padding: var(--db-space-2) var(--db-space-3);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--db-color-text-muted);
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.db-tabs__tab[aria-selected='true'] {
+  border-bottom-color: var(--db-color-primary);
+  color: var(--db-color-text);
+  font-weight: 600;
+}
+.db-tab-group__body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.db-tab-group__panel {
+  min-height: 100%;
+  padding: var(--db-space-1);
+}
+.db-tab-group__empty {
+  padding: var(--db-space-4);
+  text-align: center;
+}
+
+/* ---------- side panel (table settings) ---------- */
+
+.db-side-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: min(280px, 100%);
+  border-left: 1px solid var(--db-color-border);
+  background: var(--db-color-surface);
+  box-shadow: var(--db-shadow-popup);
+}
+.db-side-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--db-space-2) var(--db-space-3);
+  border-bottom: 1px solid var(--db-color-border);
+}
+.db-side-panel__body {
+  flex: 1;
+  overflow: auto;
+  padding: var(--db-space-3);
+}
+.db-side-panel__title {
+  margin: 0 0 var(--db-space-2);
+  font-size: var(--db-font-size-small);
+  color: var(--db-color-text-muted);
+}
+
+/* ---------- table widget (Tabulator) ---------- */
+
+.db-table {
+  position: absolute;
+  inset: 0;
+}
+.db-table__grid {
+  height: 100%;
+}
+.db-table__note {
+  padding: var(--db-space-4);
+  color: var(--db-color-text-muted);
+}
+.db-table .tabulator {
+  border: 0;
+  background: var(--db-color-surface);
+  color: var(--db-color-text);
+  font-size: var(--db-font-size);
+}
+.db-table .tabulator .tabulator-header,
+.db-table .tabulator .tabulator-header .tabulator-col {
+  border-color: var(--db-color-border);
+  background: var(--db-color-surface-2);
+  color: var(--db-color-text);
+}
+.db-table .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover {
+  background: var(--db-color-hover);
+}
+.db-table .tabulator .tabulator-tableholder {
+  background: var(--db-color-surface);
+}
+.db-table .tabulator .tabulator-tableholder .tabulator-table {
+  background: var(--db-color-surface);
+  color: var(--db-color-text);
+}
+.db-table .tabulator-row {
+  border-bottom: 1px solid var(--db-color-border);
+  background: var(--db-color-surface);
+  cursor: pointer;
+}
+.db-table .tabulator-row.tabulator-row-even {
+  background: var(--db-color-surface);
+}
+.db-table .tabulator-row.tabulator-selectable:hover,
+.db-table .tabulator-row:hover {
+  background: var(--db-color-hover);
+}
+.db-table .tabulator-row .tabulator-cell {
+  border-right-color: var(--db-color-border);
+}
+.db-table .tabulator-row.tabulator-group {
+  border-color: var(--db-color-border);
+  background: var(--db-color-surface-2);
+  color: var(--db-color-text);
+}
+.db-table .tabulator .tabulator-footer {
+  border-top: 1px solid var(--db-color-border);
+  background: var(--db-color-surface-2);
+  color: var(--db-color-text);
+}
+.db-table .tabulator .tabulator-footer .tabulator-page {
+  border-color: var(--db-color-border);
+  border-radius: var(--db-radius-small);
+  background: var(--db-color-surface);
+  color: var(--db-color-text);
+}
+.db-table .tabulator .tabulator-footer .tabulator-page.active {
+  border-color: var(--db-color-primary);
+  color: var(--db-color-primary);
+}
+.db-table .tabulator .tabulator-footer .tabulator-page-size {
+  border-color: var(--db-color-border);
+  border-radius: var(--db-radius-small);
+  background: var(--db-color-surface);
+  color: var(--db-color-text);
+}
+.db-table .tabulator .tabulator-col-resize-handle:hover {
+  background: var(--db-color-focus);
+}
+.db-table .tabulator .tabulator-footer .tabulator-page-counter,
+.db-table .tabulator .tabulator-footer label {
+  color: var(--db-color-text-muted);
+}

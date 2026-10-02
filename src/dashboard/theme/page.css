@@ -1,0 +1,330 @@
+/* Page UI (overall.md 2 → Page UI): header, edit bar, edit-mode blocks and tab groups, edit dialogs. */
+
+:root {
+  --db-color-edit-bg: #eef3fd;
+  --db-color-edit-border: #b8cdf5;
+  --db-color-edit-outline: #9fb8e8;
+  --db-color-grid-dot: #d0d5dd;
+}
+:root[data-db-theme='dark'],
+:root.db-dark {
+  --db-color-edit-bg: #1c2638;
+  --db-color-edit-border: #34507e;
+  --db-color-edit-outline: #4a6aa3;
+  --db-color-grid-dot: #333a44;
+}
+
+/* view-mode header */
+.db-page__header {
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+.db-page__title-wrap {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+.db-page__title {
+  font-size: 22px;
+  font-weight: 600;
+}
+.db-page__meta {
+  margin: 0;
+  color: var(--db-color-text-muted);
+  font-size: 13px;
+}
+.db-page__header .db-btn {
+  height: 36px;
+  border-radius: var(--db-radius-small);
+}
+.db-page__header .db-icon-btn {
+  min-width: 36px;
+  height: 36px;
+}
+
+/* edit bar: replaces the header in edit mode */
+.db-edit-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 56px;
+  padding: 8px 12px 8px 16px;
+  border: 1px solid var(--db-color-edit-border);
+  border-radius: var(--db-radius);
+  background: var(--db-color-edit-bg);
+}
+.db-edit-bar__mode {
+  color: var(--db-color-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+.db-edit-bar__name {
+  font-size: 15px;
+  font-weight: 600;
+}
+.db-edit-bar__divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 6px;
+  background: var(--db-color-edit-border);
+}
+.db-edit-bar .db-btn {
+  height: 32px;
+  border-radius: var(--db-radius-small);
+}
+.db-edit-bar__save {
+  font-weight: 600;
+}
+
+/* edit mode: dot grid behind the blocks */
+.db-page__body--editing .db-page__content {
+  border-radius: var(--db-radius);
+  background-image: radial-gradient(var(--db-color-grid-dot) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+.db-cell--editing {
+  outline: 2px dashed var(--db-color-edit-outline);
+  outline-offset: -2px;
+  border-radius: var(--db-radius);
+}
+.db-cell--editing .db-block {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.db-cell__edit-bar {
+  gap: var(--db-space-2);
+  min-height: 34px;
+  padding: 0 6px 0 6px;
+  border-bottom: 1px solid var(--db-color-border);
+  background: var(--db-color-edit-bg);
+  color: var(--db-color-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.db-drag-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--db-radius-small);
+}
+.db-drag-handle:hover {
+  background: var(--db-color-hover);
+}
+.db-icon-btn--small {
+  min-width: 24px;
+  height: 24px;
+}
+.db-page__body--editing .db-tab-group {
+  outline: 2px dashed var(--db-color-edit-outline);
+  outline-offset: -2px;
+}
+.db-page__body--editing .db-tab-group__header {
+  background: var(--db-color-edit-bg);
+}
+.db-page__body--editing .db-tab-group__panel {
+  background-image: radial-gradient(var(--db-color-grid-dot) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+.db-tabs__add {
+  align-self: center;
+  color: var(--db-color-primary);
+}
+.db-grid.grid-stack > .grid-stack-item > .ui-resizable-se {
+  opacity: 0.8;
+}
+
+/* Add block dialog */
+.db-add-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.db-add-block__top {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--db-space-3);
+}
+.db-add-block__top .db-field {
+  margin: 0;
+}
+.db-add-block__top .db-btn {
+  height: 34px;
+  font-weight: 600;
+}
+.db-or {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--db-color-text-muted);
+}
+.db-or::before,
+.db-or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--db-color-border);
+}
+.db-pick-list {
+  max-height: 320px;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+  list-style: none;
+}
+.db-pick-list__row {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-3);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--db-color-border);
+}
+.db-pick-list__row:last-child {
+  border-bottom: 0;
+}
+.db-pick-list__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Filter setup dialog */
+.db-filter-setup {
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 0;
+  min-height: 460px;
+}
+.db-filter-setup__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px;
+  border-right: 1px solid var(--db-color-border);
+  background: var(--db-color-surface-2);
+}
+.db-filter-setup__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 20px;
+}
+.db-filter-setup__options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--db-space-2) var(--db-space-5);
+}
+.db-setup-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--db-space-2);
+  min-width: 0;
+  min-height: 40px;
+  padding: 2px 8px;
+  border: 0;
+  border-radius: var(--db-radius-small);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.db-setup-row:hover {
+  background: var(--db-color-hover);
+}
+.db-setup-row--active,
+.db-setup-row--active:hover {
+  background: var(--db-color-active-bg);
+}
+.db-setup-row__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+.db-setup-row--active .db-setup-row__name {
+  font-weight: 600;
+}
+.db-setup-row__meta {
+  color: var(--db-color-text-muted);
+  font-size: 11px;
+}
+.db-tag {
+  padding: 0 6px;
+  border-radius: var(--db-radius-small);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.db-tag--danger {
+  background: var(--db-color-danger-bg);
+  color: var(--db-color-danger);
+}
+.db-mapping-list {
+  border: 1px solid var(--db-color-border);
+  border-radius: var(--db-radius);
+}
+.db-mapping-row {
+  display: flex;
+  align-items: center;
+  gap: var(--db-space-3);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--db-color-border);
+}
+.db-mapping-row:last-child {
+  border-bottom: 0;
+}
+.db-mapping-row__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+.db-mapping-row__select {
+  width: 220px;
+}
+.db-mapping-row--broken {
+  background: var(--db-color-danger-bg);
+}
+.db-mapping-row--broken .db-mapping-row__select {
+  border-color: var(--db-color-danger);
+  color: var(--db-color-danger);
+}
+.db-mapping-row--focus {
+  box-shadow: inset 3px 0 0 var(--db-color-primary);
+}
+.db-danger-link {
+  color: var(--db-color-danger);
+}
+
+/* Page settings dialog */
+.db-page-settings fieldset {
+  gap: 6px;
+}
+.db-page-settings legend {
+  margin-bottom: 6px;
+}
+
+@media (max-width: 767px) {
+  .db-filter-setup {
+    grid-template-columns: 1fr;
+  }
+  .db-filter-setup__list {
+    border-right: 0;
+    border-bottom: 1px solid var(--db-color-border);
+  }
+}
